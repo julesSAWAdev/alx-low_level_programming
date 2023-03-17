@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 /**
- * main - Prints a random number and states 
+ * main - Prints a random number and states
  *		if it is positive, negative, or zero.
  *
  * Return: Always 0.
