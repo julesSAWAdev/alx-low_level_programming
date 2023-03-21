@@ -1,7 +1,7 @@
 #include "main.h"
 /**
- * main- entry point
- * return: 0
+ * main - Entry point
+ * Return:Always 0
  */
 
 int main(void)
@@ -15,5 +15,5 @@ int main(void)
 	_putchar('a');
 	_putchar('r');
 	_putchar('\n');
-	return(0);
+	return (0);
 }
