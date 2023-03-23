@@ -5,10 +5,10 @@
  * @n: n -  Variable
  * Return: Always 0.
  */
-void print_nuaber(int n)
+void print_number(int n)
 {
-	unsigned int q;
-	int a, b;
+	unsigned int z;
+	int m, b;
 
 	b = 10;
 
@@ -30,16 +30,16 @@ void print_nuaber(int n)
 			n = n * -1;
 			_putchar ('-');
 		}
-		q = n;
-	while (q / b > 9)
+		z = n;
+	while (z / b > 9)
 	{
 		b = b * 10;
 	}
 	while (b > 0)
 	{
-		a = q / b;
-		q = q % b;
-		_putchar (a + '0');
+		m = z / b;
+		z = z % b;
+		_putchar (m + '0');
 		b = b / 10;
 	}
 	}
