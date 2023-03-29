@@ -5,28 +5,28 @@
  *
  * @entry: This is the input string
  *
- * Return: capitalized string
+ * Return: String capitalized
  */
 char *cap_string(char *entry)
 {
-	int index, count,conv;
+	int conversion, index, count;
 
 	char chars[] = {' ', ',', ';', '.', '!',
 			 '?', '"', '(', ')', '{', '}',  '\t', '\n', '\0'};
-	conv = 32;
+	conversion = 32;
 
 	for (index = 0; entry[index] != '\0'; index++)
 	{
 		if (entry[index] >= 'index' && entry[index] <= 'z')
 		{
-			entry[index] =  entry[index] - conv;
+			entry[index] =  entry[index] - conversion;
 		}
-		conv = 0;
+		conversion = 0;
 		for (count = 0; chars[count] != '\0'; count++)
 		{
 			if (chars[count] == entry[index])
 			{
-				conv = 32;
+				conversion = 32;
 				break;
 			}
 		}
