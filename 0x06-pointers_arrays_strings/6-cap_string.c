@@ -1,36 +1,35 @@
 #include "main.h"
-
 /**
- * cap_string - Write a function that capitalizes all words of a string.
+ * cap_string - capitalizes all words of a string
+ * @str: the string to change the first letter of a word in uppercase
  *
- * @entry: This is the input string
- *
- * Return: String capitalized
+ * Return: capitalizes letters
  */
-char *cap_string(char *entry)
+char *cap_string(char *str)
 {
-	int conversion, index, count;
+	int i;
+	int j;
+	char c[] = {44, 59, 46, 33, 63, 34, 40, 41, 123, 125, 32, 10, 9};
 
-	char chars[] = {' ', ',', ';', '.', '!',
-			 '?', '"', '(', ')', '{', '}',  '\t', '\n', '\0'};
-	conversion = 32;
+	i = 0;
 
-	for (index = 0; entry[index] != '\0'; index++)
+	while (str[i] != '\0')
 	{
-		if (entry[index] >= 'index' && entry[index] <= 'z')
+		if (i == 0 && str[i] >= 97 && str[i] <= 122)
 		{
-			entry[index] =  entry[index] - conversion;
+			str[i] = str[i] - 32;
 		}
-		conversion = 0;
-		for (count = 0; chars[count] != '\0'; count++)
+		j = 0;
+		while (c[j] != '\0')
 		{
-			if (chars[count] == entry[index])
+			if (c[j] == str[i] && (str[i + 1] >= 97 && str[i + 1] <= 122))
 			{
-				conversion = 32;
-				break;
+				str[i + 1] = str[i + 1] - 32;
 			}
+			j++;
 		}
+		i++;
 	}
-	return (entry);
+	return (str);
 }
 
