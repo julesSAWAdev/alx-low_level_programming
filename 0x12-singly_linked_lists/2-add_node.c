@@ -11,8 +11,13 @@
 */
 int _strlen(const char *s)
 {
-   for (i = 0; s[i]; i++)
-      ;
+   int i = 0;
+
+
+   while (s[i] != '\0')
+   {
+       i++;
+   }
    return (i);
 }
 
@@ -41,3 +46,4 @@ list_t *add_node(list_t **head, const char *str)
 
    return (new);
 }
+
