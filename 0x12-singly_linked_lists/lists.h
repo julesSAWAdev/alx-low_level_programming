@@ -1,12 +1,14 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef _CODING_H_
+#define _CODING_H_
 #include <stdio.h>
 /**
- * struct list_s - singly_linked list
- * @str: string
+ * struct list_s - singly linked list
+ * @str: string - (malloc'ed string)
  * @len: length of the string
- * @next: next node
+ * @next: points to the next node
+ *
  * Description: singly linked list node structure
+ * for Coding project
  */
 typedef struct list_s
 {
@@ -23,4 +25,3 @@ void free_list(list_t *head);
 
 char *_strdup(const char *str);
 #endif
-
