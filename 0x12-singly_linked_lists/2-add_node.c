@@ -11,9 +11,11 @@
 */
 int _strlen(const char *s)
 {
-   for (i = 0; s[i]; i++)
-      ;
-   return (i);
+    int i;
+
+	for (i = 0; s[i]; i++)
+		;
+	return (i);
 }
 
 
