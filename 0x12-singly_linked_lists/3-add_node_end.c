@@ -1,71 +1,53 @@
 #include "lists.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <stddef.h>
-/**
-  * _strlen - gets length of the string
-  * @s: string
-  * Return: length of the string
-  */
-int _strlen(const char *s)
-{
-	int i;
 
-	for (i = 0; s[i]; i++)
-		;
-	return (i);
-}
-/**
-  * _strdup - recreation of string duplicate function
-  * @src: source of string to duplicate
-  * Return: pointer to malloc'd space with copied string
-  */
-void *_strdup(const char *src)
-{
-	int len, i;
-	char *dest;
+int _strlen_recursion(char *s);
 
-	len = _strlen(src);
-	dest = malloc((len + 1) * sizeof(char));
-	if (dest == NULL)
-		return (NULL);
-	for (i = 0; src[i]; i++)
-		dest[i] = src[i];
-	dest[i] = '\0';
-	return (dest);
-}
 /**
-  * add_node_end - add new nodes to the end of the list
-  * @head: current place in the list
-  * @str: string to add to the head
-  * Return: pointer to current position in list
-  */
+ * add_node_end - add node on the end of a list_t
+ * @head: pointer to the first element of the list
+ * @str: string to set in the new node
+ * Return: address of the new element, or NULL if failed
+ **/
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new, *current;
-	char *dupstr;
+	list_t *new, *aux = *head;
 
-	if (str == NULL)
-		return (NULL);
-	dupstr = _strdup(str);
-	if (dupstr == NULL)
-		return (NULL);
 	new = malloc(sizeof(list_t));
 	if (new == NULL)
+	{
 		return (NULL);
-	new->str = dupstr;
-	new->len = _strlen(str);
+	}
+	new->str = strdup(str);
+	if (!new->str)
+	{
+		free(new);
+		return (NULL);
+	}
+	new->len = _strlen_recursion(new->str);
 	new->next = NULL;
 
-	if (*head == NULL)
+	if (aux)
 	{
-		*head = new;
-		return (*head);
+		while (aux->next)
+			aux = aux->next;
+		aux->next = new;
 	}
-	current = *head;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = new;
-	return (*head);
+	else
+		*head = new;
+
+	return (new);
+}
+
+/**
+ * _strlen_recursion - return length of a string
+ * @s: string s
+ * Return: length of string s
+ */
+int _strlen_recursion(char *s)
+{
+	if (*s == 0)
+		return (0);
+	else
+		return (1 + _strlen_recursion(s + 1));
 }
 
