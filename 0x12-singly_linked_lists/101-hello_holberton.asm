@@ -1,17 +1,18 @@
+extern printf
+section .data
+	msg: db "Hello, Holberton", 0
+	fmt: db "%s", 10, 0
+
 section .text
 	global main
-
 main:
-	mov	edx, len
-	mov	ecx, msg	;message variable
-	mov 	ebx, 1		;write to standard output
-	mov	eax, 4
-	int	0x80		;call kernel
+	push rbp
+	mov rdi,fmt
+	mov rsi,msg
+	mov rax,0
+	call printf
 
-	mov	eax, 1 		;system call (sys_exit)
-	int	0x80		;call kernel
-
-section .data
-msg db 'Hello, Coding', 0xa	;message to print
-len equ $ - msg			;length of the string
+	pop rbp
+	mov rax,0
+	ret
 
