@@ -1,63 +1,48 @@
-#include <stdlib.h>
 #include "lists.h"
-
+#include <stdlib.h>
 /**
- * add_node - function with 2 arguments
- * @head: double pointer tolist_l
- * @str: string pointer
- * desc: adds a new node at the beginning
- * return: address of new element
- */
+  * _strlen - takes length of the string
+  * @s: string
+  * return: length of the string
+  */
+int _strlen(const char *s)
+{
+	int i;
+
+	for (i = 0; s[i]; i++)
+		;
+	return (i);
+}
+/**
+  * add_node - add a node to list
+  * @head: get head in the list
+  * @str: string to add to the head
+  * return: * to current position in list
+  */
 list_t *add_node(list_t **head, const char *str)
 {
-	int count = 0;
-	list_t *temp;
+	int i, len;
+	char *item;
+	list_t *new;
 
-	temp = malloc(sizeof(list_t));
-	if (temp == NULL)
+	if (str == NULL || head == NULL)
 		return (NULL);
-	temp->str = _strdup(str);
-	while (str[count] != '\0')
-		count++;
-	temp->len = count;
-	temp->next = *head;
-	*head = temp;
-	
-	return (temp);
-}
-
-/**
- * *_strdup - function with one argument
- * @str: string argument
- * desc: return* to allocated memory
- * return: *
- */
-char *_strdup(const char *str)
-{
-	int i, j;
-	char *ptr;
-
-	if (str == NULL)
+	len = _strlen(str);
+	new = *head;
+	item = malloc((len + 1) * sizeof(char));
+	if (item == NULL)
 		return (NULL);
-	i = 0;
-	while (*(str + i) != '\0')
+	for (i = 0; str[i]; i++)
+		item[i] = str[i];
+	new = malloc(sizeof(list_t));
+	if (new == NULL)
 	{
-		i++;
-	}
-
-	ptr = malloc(sizeof(char) * i + 1);
-
-	if (ptr == NULL)
+		free(item);
 		return (NULL);
-
-	j = 0;
-	while (str[j] != '\0')
-	{
-		ptr[j] = str[j];
-		j++;
 	}
-	
-	ptr[j] = '\0';
-	return (ptr);
+	new->str = item;
+	new->len = len;
+	new->next = *head;
+	*head = new;
+	return (new);
 }
-
