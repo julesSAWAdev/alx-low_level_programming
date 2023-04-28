@@ -1,62 +1,46 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include "lists.h"
 
+int _strlen_recursion(char *s);
 
 /**
-* _strlen - function that returns the length of a string.
-* @s : s is a character
-* Return: value is i
-*/
-int _strlen(const char *s)
-{
-   int i = 0;
-
-
-   while (s[i] != '\0')
-   {
-       i++;
-   }
-   return (i);
-}
-
-
-/**
-* add_node - add a new node at beginning of a list_t list.
-* @head: head of a list_t list.
-* @str: value to insert into element.
-* Return: the number of nodes.
-*/
+ * add_node - adds a new node at the beginning of a list_t list.
+ * @head: pointer to the first element of the list.
+ * @str: string to set in the new node.
+ * Return: address of the new element, or NULL if it failed
+ **/
 list_t *add_node(list_t **head, const char *str)
 {
-	int i, len;
-	char *content;
 	list_t *new;
 
-	if (str == NULL || head == NULL)
-		return (NULL);
-	len = _strlen(str);
-	new = *head;
-	content = malloc((len + 1) * sizeof(char));
-	if (content == NULL)
-		return (NULL);
-	for (i = 0; str[i]; i++)
-		content[i] = str[i];
-
-   new = malloc(sizeof(list_t));
-   if (new == NULL)
+	new = malloc(sizeof(list_t));
+	if (new == NULL)
 	{
-		free(content);
 		return (NULL);
 	}
 
-   new->str = content;
-   new->len = _strlen(str);
-   new->next = *head;
-   *head = new;
+	new->str = strdup(str);
+	if (!new->str)
+	{
+		free(new);
+		return (NULL);
+	}
+	new->len = _strlen_recursion(new->str);
+	new->next = *head;
+	*head = new;
 
+	return (new);
+}
 
-   return (new);
+/**
+ * _strlen_recursion - returns the length of a string.
+ * @s: string.
+ * Return: length of @s.
+ */
+int _strlen_recursion(char *s)
+{
+	if (*s == 0)
+		return (0);
+	else
+		return (1 + _strlen_recursion(s + 1));
 }
 
